@@ -2,60 +2,390 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Police FIR Tracking System - Login</title>
-    <meta name="description" content="Login portal for the Online Police FIR Tracking System">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FIR Tracking System</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="logo-section">
-            <svg class="badge" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 0L90 15V50C90 80 50 115 50 120C50 115 10 80 10 50V15L50 0Z" fill="#1e3a8a"/>
-                <path d="M50 5L85 18.5V50C85 76.5 50 108 50 113C50 108 15 76.5 15 50V18.5L50 5Z" fill="#2563eb"/>
-                <path d="M50 10L80 22V50C80 73 50 101 50 106C50 101 20 73 20 50V22L50 10Z" fill="#1e40af"/>
-                <text x="50" y="45" font-family="Inter" font-weight="800" font-size="16" fill="white" text-anchor="middle" letter-spacing="1">POLICE</text>
-                <circle cx="50" cy="70" r="10" stroke="white" stroke-width="2"/>
-                <path d="M47 67L50 73L55 65" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M35 25L42 32L35 32Z" fill="white"/>
-                <path d="M65 25L58 32L65 32Z" fill="white"/>
-                <circle cx="50" cy="22" r="5" fill="white"/>
-            </svg>
-            <h1>ONLINE POLICE FIR<br>TRACKING SYSTEM</h1>
-        </div>
+    <div id="app" class="app-container">
+        <!-- SCREEN 0: Role Selection -->
+        <section id="role-selection" class="screen">
+            <div class="role-container">
+                <div class="logo-section">
+                    <div class="shield-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h1>FIR TRACKING SYSTEM</h1>
+                    <p>Select your role to continue</p>
+                </div>
+                <div class="roles-grid">
+                    <div class="role-card" data-role="citizen">
+                        <div class="role-icon"><i class="fa-solid fa-users"></i></div>
+                        <h3>Citizen</h3>
+                        <p>File & Track FIRs</p>
+                    </div>
+                    <div class="role-card" data-role="inspector">
+                        <div class="role-icon"><i class="fa-solid fa-user-shield"></i></div>
+                        <h3>Inspector</h3>
+                        <p>Manage Cases</p>
+                    </div>
+                    <div class="role-card" data-role="dsp">
+                        <div class="role-icon"><i class="fa-solid fa-star"></i></div>
+                        <h3>DSP (Admin)</h3>
+                        <p>Station Overview</p>
+                    </div>
+                    <div class="role-card" data-role="sp">
+                        <div class="role-icon"><i class="fa-solid fa-building-shield"></i></div>
+                        <h3>SP (Super Admin)</h3>
+                        <p>District Oversight</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="login-card">
-            <h2>Login</h2>
+        <!-- SCREEN 1: Login -->
+        <section id="login" class="screen hidden">
+            <div class="login-container">
+                <div class="header-blue-bg"></div>
+                <div class="login-content">
+                    <div class="logo-section text-center">
+                        <div class="shield-icon outline">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h2>FIR TRACKING APP</h2>
+                    </div>
+                    
+                    <form id="login-form">
+                        <div class="input-group">
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                                <input type="tel" placeholder="Mobile Number" required>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" placeholder="Password" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <span class="text-gray">or</span> <a href="#" class="text-blue fw-600">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: Home -->
+        <section id="home" class="screen with-bottom-nav hidden">
+            <div class="header-top">
+                <div class="header-left">
+                    <i class="fa-solid fa-bars"></i>
+                    <span>Home</span>
+                </div>
+                <div class="header-right">
+                    <i class="fa-solid fa-search"></i>
+                    <div class="notification-badge">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="badge">2</span>
+                    </div>
+                </div>
+            </div>
             
-            <form>
-                <div class="input-group">
-                    <label>Mobile Number</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-mobile-screen"></i>
-                        <input type="tel" placeholder="Enter your mobile number" aria-label="Mobile Number">
+            <div class="content-scrollable">
+                <div class="greeting">
+                    <h2>Hello, Satish 👋</h2>
+                </div>
+
+                <div class="action-cards">
+                    <div class="action-card primary" onclick="showScreen('register-fir')">
+                        <div class="action-icon"><i class="fa-solid fa-plus"></i></div>
+                        <div class="action-text">
+                            <h3>Register FIR</h3>
+                            <p>Report incident</p>
+                        </div>
+                    </div>
+                    <div class="action-card outline" onclick="showScreen('track-fir')">
+                        <div class="action-icon blue-text"><i class="fa-solid fa-search"></i></div>
+                        <div class="action-text">
+                            <h3 class="blue-text">Track FIR</h3>
+                            <p>Search FIR</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <label>Password</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="Enter your password" aria-label="Password">
-                        <span class="show-password">Show</span>
+                <div class="section-title">
+                    <h3>Your FIRs</h3>
+                </div>
+
+                <div class="fir-list">
+                    <div class="fir-card">
+                        <div class="fir-icon pending">A</div>
+                        <div class="fir-details">
+                            <h4>FIR #123456</h4>
+                            <p>April 22, 2024</p>
+                        </div>
+                        <div class="fir-status pill-pending">Pending</div>
+                    </div>
+                    <div class="fir-card">
+                        <div class="fir-icon closed">A</div>
+                        <div class="fir-details">
+                            <h4>FIR #123455</h4>
+                            <p>April 20, 2024</p>
+                        </div>
+                        <div class="fir-status pill-closed">Closed</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: Track FIR -->
+        <section id="track-fir" class="screen with-bottom-nav hidden">
+            <div class="header-top blue-fill">
+                <div class="header-left">
+                    <i class="fa-solid fa-arrow-left" onclick="showScreen('home')"></i>
+                    <span>Track FIR</span>
+                </div>
+                <div class="header-right">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+            </div>
+            
+            <div class="content-scrollable tracking-content">
+                <div class="search-section">
+                    <label>Enter FIR ID</label>
+                    <div class="search-box">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" placeholder="Enter FIR ID" value="123456">
+                        <button class="btn btn-sm">Search</button>
                     </div>
                 </div>
 
-                <button type="button" class="login-btn">LOGIN <i class="fa-solid fa-arrow-right"></i></button>
-                
-                <a href="#" class="forgot-password">Forgot Password?</a>
-            </form>
-        </div>
+                <div class="section-title mt-4">
+                    <h3>Status:</h3>
+                </div>
 
-        <div class="register-link">
-            First time user? <a href="#">Register Now</a>
-        </div>
+                <div class="timeline">
+                    <div class="timeline-item active">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="d-flex justify-between">
+                                <h4>Pending</h4>
+                                <span class="pill-pending">Pending</span>
+                            </div>
+                            <p>April 22, 2024</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker default"></div>
+                        <div class="timeline-content">
+                            <h4>FIR Registered</h4>
+                            <p>April 22, 2024</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker warning"></div>
+                        <div class="timeline-content">
+                            <h4>Under Investigation</h4>
+                            <p>Missing items</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item last">
+                        <div class="timeline-marker default"></div>
+                        <div class="timeline-content">
+                            <h4>FIR Closed</h4>
+                            <p>In Progress</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 4: Register FIR -->
+        <section id="register-fir" class="screen with-bottom-nav hidden">
+            <div class="header-top blue-fill">
+                <div class="header-left">
+                    <i class="fa-solid fa-arrow-left" onclick="showScreen('home')"></i>
+                    <span>Register FIR</span>
+                </div>
+            </div>
+            
+            <div class="content-scrollable registration-content">
+                <form id="registration-form" class="form-container">
+                    <div class="input-group">
+                        <label>Incident Type / Crime Category</label>
+                        <select required>
+                            <option value="">Select Category</option>
+                            <option value="theft">Theft / Robbery</option>
+                            <option value="assault">Assault</option>
+                            <option value="fraud">Fraud / Cybercrime</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Incident Date & Time</label>
+                        <input type="datetime-local" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Incident Location</label>
+                        <input type="text" placeholder="Enter exact location" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Detailed Description</label>
+                        <textarea rows="4" placeholder="Describe the incident in detail..." required></textarea>
+                    </div>
+
+                    <div class="upload-section">
+                        <div class="upload-box">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Upload Evidence (Images/Video)</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Submit FIR</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SCREEN 5: Notifications -->
+        <section id="notifications" class="screen with-bottom-nav hidden">
+            <div class="header-top">
+                <div class="header-left">
+                    <i class="fa-solid fa-arrow-left" onclick="showScreen('home')"></i>
+                    <span>Notifications</span>
+                </div>
+            </div>
+            
+            <div class="content-scrollable notifications-content">
+                <div class="timeline">
+                    <div class="timeline-item active no-line">
+                        <div class="timeline-icon bg-blue-light"><i class="fa-solid fa-suitcase"></i></div>
+                        <div class="timeline-content">
+                            <div class="d-flex justify-between">
+                                <h4>Court date set for <br>FIR #123456 tomorrow <br>at 10 AM</h4>
+                                <span class="time-text">1 hour ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item no-line">
+                        <div class="timeline-icon bg-gray-light"><i class="fa-solid fa-file-lines"></i></div>
+                        <div class="timeline-content">
+                            <div class="d-flex justify-between">
+                                <h4>Case status updated to <br>Under Investigation</h4>
+                                <span class="time-text">Yesterday</span>
+                            </div>
+                            <p>Track FIR app</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item last no-line">
+                        <div class="timeline-icon bg-blue-light"><i class="fa-solid fa-suitcase"></i></div>
+                        <div class="timeline-content">
+                            <div class="d-flex justify-between">
+                                <h4>Evidence updated for <br>FIR #12356</h4>
+                                <span class="time-text">2 days ago</span>
+                            </div>
+                            <p>Mobile App</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 6: Dashboard (Admin preview or Profile stats) -->
+        <section id="dashboard" class="screen with-bottom-nav hidden">
+            <div class="header-top">
+                <div class="header-left">
+                    <i class="fa-solid fa-bars"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="header-right">
+                    <img src="https://ui-avatars.com/api/?name=Satish&background=1e3a8a&color=fff" alt="Profile" class="profile-img-sm">
+                </div>
+            </div>
+            
+            <div class="content-scrollable dashboard-content">
+                <div class="stats-hero">
+                    <div class="stats-left">
+                        <p>Total FIRs</p>
+                        <h2>120</h2>
+                    </div>
+                    <div class="stats-right">
+                        <h2>80 <i class="fa-solid fa-arrow-trend-up"></i></h2>
+                        <div class="pill-growth"><i class="fa-solid fa-circle text-xs"></i> 52%</div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <h3>Crime Statistics</h3>
+                    <div class="chart-tabs">
+                        <span class="tab active">TW</span>
+                        <span class="tab">1M</span>
+                        <span class="tab">6M</span>
+                        <span class="tab">5M</span>
+                        <span class="tab">1Y</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="crimeStatsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card mt-4 mb-4">
+                    <h3>FIR Status</h3>
+                    <div class="d-flex align-center">
+                        <div class="status-legend">
+                            <div class="legend-item"><span class="dot closed"></span> Closed <span>22%</span></div>
+                            <div class="legend-item"><span class="dot investigation"></span> Under Investigation <span>20%</span></div>
+                            <div class="legend-item"><span class="dot pending"></span> Pending <span>20%</span></div>
+                        </div>
+                        <div class="pie-container">
+                            <canvas id="statusPieChart"></canvas>
+                            <div class="pie-center-text">52%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav id="bottom-nav" class="bottom-nav hidden">
+            <div class="nav-item" id="nav-home" onclick="showScreen('home')">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" id="nav-firs" onclick="showScreen('track-fir')">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>FIRs</span>
+            </div>
+            <div class="nav-item fab-item" id="nav-add" onclick="showScreen('register-fir')">
+                <div class="fab">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+            <div class="nav-item" id="nav-notifications" onclick="showScreen('notifications')">
+                <div class="rel">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="nav-badge">4</span>
+                </div>
+                <span>Notifications</span>
+            </div>
+            <div class="nav-item" id="nav-profile" onclick="showScreen('dashboard')">
+                <i class="fa-regular fa-user"></i>
+                <span>Profile</span>
+            </div>
+        </nav>
     </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
