@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Police FIR Tracking System - Login</title>
+    <meta name="description" content="Login portal for the Online Police FIR Tracking System">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <svg class="badge" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 0L90 15V50C90 80 50 115 50 120C50 115 10 80 10 50V15L50 0Z" fill="#1e3a8a"/>
+                <path d="M50 5L85 18.5V50C85 76.5 50 108 50 113C50 108 15 76.5 15 50V18.5L50 5Z" fill="#2563eb"/>
+                <path d="M50 10L80 22V50C80 73 50 101 50 106C50 101 20 73 20 50V22L50 10Z" fill="#1e40af"/>
+                <text x="50" y="45" font-family="Inter" font-weight="800" font-size="16" fill="white" text-anchor="middle" letter-spacing="1">POLICE</text>
+                <circle cx="50" cy="70" r="10" stroke="white" stroke-width="2"/>
+                <path d="M47 67L50 73L55 65" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M35 25L42 32L35 32Z" fill="white"/>
+                <path d="M65 25L58 32L65 32Z" fill="white"/>
+                <circle cx="50" cy="22" r="5" fill="white"/>
+            </svg>
+            <h1>ONLINE POLICE FIR<br>TRACKING SYSTEM</h1>
+        </div>
+
+        <div class="login-card">
+            <h2>Login</h2>
+            
+            <form>
+                <div class="input-group">
+                    <label>Mobile Number</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                        <input type="tel" placeholder="Enter your mobile number" aria-label="Mobile Number">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Enter your password" aria-label="Password">
+                        <span class="show-password">Show</span>
+                    </div>
+                </div>
+
+                <button type="button" class="login-btn">LOGIN <i class="fa-solid fa-arrow-right"></i></button>
+                
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </form>
+        </div>
+
+        <div class="register-link">
+            First time user? <a href="#">Register Now</a>
+        </div>
+    </div>
+</body>
+</html>
