@@ -67,6 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const role = this.getAttribute('data-role');
             if (role === 'citizen') {
                 showScreen('login');
+            } else if (role === 'inspector') {
+                window.location.href = 'inspector.html';
+            } else if (role === 'dsp' || role === 'sp') {
+                window.location.href = 'admin.html';
             } else {
                 alert(role.toUpperCase() + " flow is not implemented in this demo.");
             }

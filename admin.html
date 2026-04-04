@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FIR Tracking System - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app" class="app-container admin-app">
+        
+        <!-- Top App Bar Default (Red Gradient) -->
+        <div class="admin-top-bar" id="admin-top-bar">
+            <div class="admin-header-content">
+                <div class="shield-image-wrapper">
+                    <div class="shield-icon outline admin-shield">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <div class="header-text text-white">
+                    <h1>FIR & CASE</h1>
+                    <p>TRACKING SYSTEM</p>
+                </div>
+                <div class="admin-top-right">
+                    <div class="icon-btn text-white"><i class="fa-solid fa-bell"></i><span class="badge red"></span></div>
+                </div>
+            </div>
+            <div class="admin-sub-header">
+                <span class="text-xs fw-600">Police Superintendent of Police</span>
+                <span class="online-status text-xs"><i class="fa-solid fa-circle"></i> Online</span>
+            </div>
+        </div>
+
+        <!-- Top App Bar for Profile/Reports -->
+        <div class="admin-top-bar profile-style hidden" id="admin-profile-bar">
+            <div class="admin-header-content align-center">
+                <img src="https://ui-avatars.com/api/?name=Arvind+Kumar&background=cbd5e1&color=1e293b" alt="SP" class="header-avatar-lg">
+                <div class="header-text text-white flex-1 pl-3">
+                    <p class="text-xs text-white op-80 mb-1">Superintendent of Police</p>
+                    <h1 class="text-md">ARVIND KUMAR, IPS</h1>
+                    <p class="text-xs bg-dark-red rounded px-2 py-1 d-inline-block mt-1"><i class="fa-solid fa-shield-halved text-red"></i> Super Admin (SP) &middot; Crime</p>
+                </div>
+            </div>
+            <div class="admin-notification-banner bg-white text-main rounded mt-3 p-2 text-xs d-flex align-center gap-2">
+                <i class="fa-solid fa-bullhorn text-warning"></i>
+                <marquee scrollamount="3" class="flex-1">Notification: Focus tracking on recent reports &middot; Ensure timely closures</marquee>
+            </div>
+            <p class="text-right text-xs text-white op-70 mt-2 font-mono">2024-04-23 at 19:33:45</p>
+        </div>
+
+        <!-- Small Back Header -->
+        <div class="admin-top-bar small hidden" id="admin-back-bar">
+            <div class="back-header">
+                <i class="fa-solid fa-arrow-left" onclick="goBack()"></i>
+                <span id="back-bar-title" class="fw-600">Assign FIR</span>
+            </div>
+            <div class="header-action">
+                <i class="fa-solid fa-sliders text-gray"></i>
+            </div>
+        </div>
+
+
+        <!-- SCREEN 1: Admin Dashboard -->
+        <section id="admin-dashboard" class="screen with-bottom-nav active">
+            <div class="content-scrollable admin-content has-top-card">
+                
+                <div class="welcome-card admin-welcome">
+                    <div class="welcome-header">
+                        <img src="https://ui-avatars.com/api/?name=Arvind+Kumar&background=cbd5e1&color=1e293b" alt="SP" class="avatar-sm">
+                        <h2>Super Admin Dashboard</h2>
+                    </div>
+                    <p class="welcome-text text-xs line-clamp-2">Overview of all district officers, case assignments, and pending tracking reports within the jurisdiction.</p>
+                </div>
+
+                <div class="search-box admin-search mx-3 mt-3 shadow-sm bg-white">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Enter FIR ID...">
+                </div>
+
+                <div class="officer-list mt-4 px-3">
+                    <!-- Officer Card 1 -->
+                    <div class="admin-case-card mb-3">
+                        <div class="d-flex justify-between align-start mb-3">
+                            <div class="d-flex gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Rajesh+Kumar&background=f1f5f9&color=0f172a" class="avatar-md">
+                                <div>
+                                    <h3 class="fw-700 m-0 text-main">Rajesh Kumar</h3>
+                                    <p class="text-xs text-muted m-0">East District</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray text-sm mt-1"></i>
+                        </div>
+                        
+                        <div class="d-flex gap-2 mb-3">
+                            <span class="status-bg-tag bg-blue-light text-main"><span class="fw-700">8</span> In-progress</span>
+                            <span class="status-bg-tag bg-yellow-light text-main"><i class="fa-solid fa-layer-group text-yellow"></i> 121 In Progress</span>
+                        </div>
+                        
+                        <div class="d-flex justify-between align-center border-top pt-3 mt-1">
+                            <span class="text-xs text-gray"><i class="fa-solid fa-building"></i> East District</span>
+                            <button class="btn btn-primary btn-sm rounded-pill px-4" onclick="showScreen('admin-assign-fir', 'Assign FIR')">Assign FIR</button>
+                        </div>
+                    </div>
+
+                    <!-- Officer Card 2 -->
+                    <div class="admin-case-card mb-3">
+                        <div class="d-flex justify-between align-start mb-3">
+                            <div class="d-flex gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Suresh+Yadav&background=f1f5f9&color=0f172a" class="avatar-md">
+                                <div>
+                                    <h3 class="fw-700 m-0 text-main">Suresh Yadav</h3>
+                                    <p class="text-xs text-muted m-0">West District</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray text-sm mt-1"></i>
+                        </div>
+                        
+                        <div class="d-flex gap-2 mb-3">
+                            <span class="status-bg-tag bg-gray-50 text-main"><span class="fw-700">5</span> Pending</span>
+                            <span class="status-bg-tag bg-yellow-light text-main"><i class="fa-solid fa-layer-group text-yellow"></i> 116 In Progress</span>
+                        </div>
+                        
+                        <div class="d-flex justify-between align-center border-top pt-3 mt-1">
+                            <span class="text-xs text-gray"><i class="fa-solid fa-building"></i> West District</span>
+                            <button class="btn btn-primary btn-sm rounded-pill px-4" onclick="showScreen('admin-assign-fir', 'Assign FIR')">Assign FIR</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-3 mb-4">
+                    <button class="btn btn-primary btn-block bg-blue-text-white rounded-xl">+ Add DSP Officer</button>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SCREEN 2: Assign FIR (Red theme action screen) -->
+        <section id="admin-assign-fir" class="screen with-bottom-nav hidden">
+            <div class="content-scrollable px-3 py-3 bg-white">
+                
+                <div class="search-box admin-search shadow-sm bg-white mb-4">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Enter FIR ID...">
+                </div>
+
+                <div class="selected-entity-card bg-yellow-light p-3 rounded-lg d-flex gap-3 align-center mb-4">
+                    <img src="https://ui-avatars.com/api/?name=D+S&background=fde047&color=1e293b" class="avatar-sm">
+                    <h3 class="m-0 text-main fw-700">DSP #123568</h3>
+                </div>
+
+                <div class="selection-list">
+                    <!-- Option 1 -->
+                    <div class="selection-item border-bottom py-3 d-flex justify-between align-center">
+                        <div class="d-flex align-center gap-3">
+                            <div class="type-icon bg-red text-white"><i class="fa-solid fa-user-xmark" style="transform: rotate(45deg);"></i></div>
+                            <div>
+                                <h4 class="m-0 text-main fw-700">Rajesh Kumar</h4>
+                                <p class="text-xs text-muted m-0">East District</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <h3 class="m-0 fw-700 text-main">8</h3>
+                            <span class="text-xs text-gray font-mono">Assigned</span>
+                        </div>
+                    </div>
+
+                    <!-- Option 2 -->
+                    <div class="selection-item border-bottom py-3 d-flex justify-between align-center">
+                        <div class="d-flex align-center gap-3">
+                            <div class="type-icon bg-yellow text-white"><i class="fa-solid fa-user-clock"></i></div>
+                            <div>
+                                <h4 class="m-0 text-main fw-700">Suresh Yadav</h4>
+                                <p class="text-xs text-muted m-0">West District</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <h3 class="m-0 fw-700 text-main">5</h3>
+                            <span class="text-xs text-gray font-mono">Pending</span>
+                        </div>
+                    </div>
+
+                    <!-- Option 3 -->
+                    <div class="selection-item border-bottom py-3 d-flex justify-between align-center">
+                        <div class="d-flex align-center gap-3">
+                            <div class="type-icon bg-blue text-white">A</div>
+                            <div>
+                                <h4 class="m-0 text-main fw-700">Priya Sharma</h4>
+                                <p class="text-xs text-muted m-0">North District</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="status-pill pill-green mb-1 d-inline-block">Available</span>
+                            <span class="status-bg-tag bg-gray-50 text-gray d-block w-fit-content px-2 py-0">0%</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Option 4 -->
+                    <div class="selection-item py-3 d-flex justify-between align-center">
+                        <div class="d-flex align-center gap-3">
+                            <div class="type-icon bg-green text-white">B</div>
+                            <div>
+                                <h4 class="m-0 text-main fw-700">Amit Singh</h4>
+                                <p class="text-xs text-muted m-0">South District</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="status-pill pill-green">Available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button class="btn btn-danger btn-block rounded-xl py-3 fw-700 text-md shadow-red" onclick="goBack()">Assign FIR</button>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SCREEN 3: Reports & Analytics -->
+        <section id="admin-reports" class="screen with-bottom-nav hidden">
+            <div class="content-scrollable admin-content has-top-spacing no-top-card bg-white">
+                
+                <h2 class="mb-3 ps-3 text-main">Reports</h2>
+                
+                <div class="toggle-slider mx-3 mb-4">
+                    <div class="toggle-option active">Weekly</div>
+                    <div class="toggle-option">Monthly</div>
+                </div>
+
+                <div class="dashboard-section px-3 mb-4">
+                    <div class="d-flex justify-between align-center mb-3">
+                        <h3 class="text-md fw-700 m-0">Case Overview</h3>
+                        <i class="fa-solid fa-chevron-right text-gray text-sm"></i>
+                    </div>
+                    
+                    <div class="overview-grid">
+                        <div class="overview-box bg-green text-white rounded-lg p-3">
+                            <div class="d-flex align-center gap-2 mb-1"><i class="fa-solid fa-caret-up"></i> <span class="text-xs fw-600">Total</span></div>
+                            <h2 class="m-0">129</h2>
+                        </div>
+                        <div class="overview-box bg-yellow-light text-main rounded-lg p-3">
+                            <div class="d-flex align-center gap-2 mb-1"><i class="fa-solid fa-circle-half-stroke text-yellow"></i> <span class="text-xs fw-600">Pending</span></div>
+                            <h2 class="m-0">38 <span class="text-xs fw-500 text-gray">27.3%</span></h2>
+                        </div>
+                        <div class="overview-box bg-blue text-white rounded-lg p-3">
+                            <div class="d-flex align-center gap-2 mb-1"><i class="fa-solid fa-folder-open"></i> <span class="text-xs fw-600">Active</span></div>
+                            <h2 class="m-0">1,110</h2>
+                        </div>
+                        <div class="overview-box bg-green-light text-main rounded-lg p-3">
+                            <div class="d-flex align-center gap-2 mb-1"><i class="fa-solid fa-check text-green"></i> <span class="text-xs fw-600">Closed</span></div>
+                            <h2 class="m-0">26 <span class="text-xs fw-500 text-gray">20.3%</span></h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section px-3 mb-4">
+                    <h3 class="text-md fw-700 m-0 mb-3">Crime Breakdown</h3>
+                    
+                    <div class="admin-case-card d-flex align-center shadow-sm">
+                        <div class="chart-wrapper">
+                            <canvas id="crimeDoughnutChart"></canvas>
+                            <div class="chart-center-text">
+                                <h3 class="m-0 text-main">42%</h3>
+                                <p class="text-xs text-gray m-0">Theft</p>
+                            </div>
+                        </div>
+                        <div class="chart-legend ml-3">
+                            <div class="legend-row"><span class="legend-color bg-green"></span> 2 <strong>12%</strong></div>
+                            <div class="legend-row mt-2"><span class="legend-color bg-yellow"></span> 2 <strong>Fraud</strong></div>
+                            <div class="legend-row mt-2"><span class="legend-color bg-blue"></span> 5 <strong>Assault</strong></div>
+                            <div class="legend-row mt-2"><span class="legend-color bg-dark-blue"></span> 6 <strong>Cyber Crime</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SCREEN 4: Available DSPs (List view variation) -->
+        <section id="admin-available-dsps" class="screen with-bottom-nav hidden">
+            <div class="content-scrollable px-3 py-3 bg-white">
+                
+                <h3 class="mb-3 d-flex align-center gap-2 text-md"><i class="fa-solid fa-list text-primary"></i> Available DSPs 
+                    <i class="fa-solid fa-rotate-right ml-auto text-gray text-sm cursor-pointer"></i>
+                </h3>
+                
+                <div class="toggle-slider mb-4">
+                    <div class="toggle-option active"><i class="fa-solid fa-circle text-xs text-primary mr-1"></i> Weekly</div>
+                    <div class="toggle-option">Monthly</div>
+                    <div class="d-flex ml-auto pr-3 gap-3">
+                        <i class="fa-solid fa-lock text-gray"></i>
+                        <i class="fa-regular fa-bookmark text-gray"></i>
+                    </div>
+                </div>
+
+                <div class="officer-list">
+                    <!-- DSP 1 -->
+                    <div class="admin-case-card mb-3 p-3">
+                        <div class="d-flex align-center gap-3 mb-3">
+                            <img src="https://ui-avatars.com/api/?name=Rajesh+Kumar&background=f1f5f9&color=0f172a" class="avatar-md">
+                            <div>
+                                <h3 class="fw-700 m-0 text-main">Rajesh Kumar</h3>
+                                <p class="text-xs text-muted m-0">East District</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-between align-center border-top pt-3">
+                            <span class="status-bg-tag bg-gray-50 text-main"><span class="fw-700">12</span> Cases Assigned</span>
+                            <button class="btn btn-outline-primary btn-sm rounded-pill px-4 bg-transparent text-primary">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- DSP 2 -->
+                    <div class="admin-case-card mb-3 p-3">
+                        <div class="d-flex align-center gap-3 mb-3">
+                            <img src="https://ui-avatars.com/api/?name=Suresh+Yadav&background=f1f5f9&color=0f172a" class="avatar-md">
+                            <div>
+                                <h3 class="fw-700 m-0 text-main">Suresh Yadav</h3>
+                                <p class="text-xs text-muted m-0">West District</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-between align-center border-top pt-3">
+                            <span class="status-bg-tag bg-gray-50 text-main"><span class="fw-700">8</span> Cases Assigned</span>
+                            <button class="btn btn-outline-primary btn-sm rounded-pill px-4 bg-transparent text-primary">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- DSP 3 -->
+                    <div class="admin-case-card mb-3 p-3">
+                        <div class="d-flex align-center gap-3 mb-3">
+                            <img src="https://ui-avatars.com/api/?name=Amit+Singh&background=f1f5f9&color=0f172a" class="avatar-md">
+                            <div>
+                                <h3 class="fw-700 m-0 text-main">Amit Singh</h3>
+                                <p class="text-xs text-muted m-0">South District</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-between align-center border-top pt-3">
+                            <span class="status-bg-tag bg-gray-50 text-main"><span class="fw-700">6</span> Cases Assigned</span>
+                            <button class="btn btn-outline-primary btn-sm rounded-pill px-4 bg-transparent text-primary">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Admin Bottom Navigation -->
+        <nav id="admin-bottom-nav" class="bottom-nav">
+            <div class="nav-item active" onclick="showScreen('admin-dashboard', 'Dashboard', 'top')">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('admin-available-dsps', 'Available DSPs', 'back')">
+                <i class="fa-solid fa-users-viewfinder"></i>
+                <span>Case List</span>
+            </div>
+            <div class="nav-item fab-item" onclick="showScreen('admin-assign-fir', 'Assign FIR', 'back')">
+                <div class="fab admin-fab">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showScreen('admin-reports', 'Reports', 'profile')">
+                <div class="rel">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span class="nav-badge admin-badge">!</span>
+                </div>
+                <span>Reports</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('admin-dashboard', 'Settings', 'top')">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </div>
+        </nav>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

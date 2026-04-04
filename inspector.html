@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FIR Tracking System - Inspector Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="app-container inspector-app">
+        
+        <!-- Top App Bar (Common for many screens) -->
+        <div class="inspector-top-bar" id="inspector-top-bar">
+            <div class="police-profile-header">
+                <img src="https://ui-avatars.com/api/?name=Amit+Singh&background=cbd5e1&color=1e293b" alt="Police" class="header-avatar">
+                <div class="header-text">
+                    <h1>FIR & CASE</h1>
+                    <p>TRACKING SYSTEM</p>
+                </div>
+            </div>
+            <div class="header-action">
+                <i class="fa-regular fa-folder-open"></i>
+            </div>
+        </div>
+
+        <div class="inspector-top-bar small hidden" id="inspector-back-bar">
+            <div class="back-header">
+                <i class="fa-solid fa-arrow-left" onclick="goBack()"></i>
+                <span id="back-bar-title" class="fw-600">Update Case Status</span>
+            </div>
+            <div class="header-action">
+                <i class="fa-solid fa-ellipsis-vertical" style="opacity: 0"></i>
+            </div>
+        </div>
+
+
+        <!-- SCREEN 1: Dashboard Main -->
+        <section id="inspector-dashboard" class="screen with-bottom-nav active">
+            <div class="content-scrollable inspector-content has-top-card">
+                
+                <div class="welcome-card">
+                    <div class="welcome-header">
+                        <div class="station-icon"><i class="fa-solid fa-building-user"></i></div>
+                        <h2>Daroga Dashboard</h2>
+                    </div>
+                    <p class="welcome-text">Welcome, Amit Singh</p>
+                    
+                    <div class="active-cases-banner">
+                        <div class="banner-left">
+                            <span class="banner-number">5</span>
+                            <span class="banner-text">Active Cases</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="fir-cards-list mt-4">
+                    <!-- Case Card 1 -->
+                    <div class="case-card" onclick="showScreen('inspector-case-tabs', 'Case Details')">
+                        <div class="case-header">
+                            <h3>FIR #2024/123456</h3>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-type-status">
+                                <div class="case-type">
+                                    <div class="type-icon bg-yellow-light text-yellow"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                    <span class="fw-600">Theft</span>
+                                </div>
+                                <div class="status-pill pill-yellow">In Progress</div>
+                            </div>
+                            <p class="case-location">Connaught Place PS</p>
+                            
+                            <div class="case-meta mt-3">
+                                <div class="meta-item"><i class="fa-solid fa-users-rectangle"></i> 0 Days ago &middot; April 19, 2024</div>
+                                <div class="meta-item"><i class="fa-regular fa-clock"></i> Last Updated 1 hour ago <i class="fa-solid fa-chevron-right ms-auto"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Card 2 -->
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>FIR #2024/123450</h3>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-type-status">
+                                <div class="case-type">
+                                    <div class="type-icon bg-blue-light text-blue"><i class="fa-solid fa-money-check-dollar"></i></div>
+                                    <span class="fw-600">Fraud</span>
+                                </div>
+                                <div class="status-pill pill-blue">In Investigation</div>
+                            </div>
+                            <p class="case-location">Karol Bagh Police Station</p>
+                            
+                            <div class="case-meta mt-3">
+                                <div class="meta-item"><i class="fa-solid fa-users-rectangle"></i> 1 Day ago &middot; April 20, 2024</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="view-all-btn">
+                    <i class="fa-regular fa-folder"></i> View All Cases <i class="fa-solid fa-chevron-right"></i>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SCREEN 2: Update Case Status -->
+        <section id="inspector-update-status" class="screen with-bottom-nav hidden">
+            <div class="content-scrollable inspector-content has-top-spacing no-top-card">
+                
+                <div class="case-card border-none box-shadow-none pt-0">
+                    <div class="case-header">
+                        <h3>FIR #2024/123456</h3>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="assignment-chain mt-2">
+                        <p class="text-sm text-gray">DSP Rajesh Kumar &middot; East District &rarr;</p>
+                        <div class="d-flex align-center gap-2 mt-2">
+                            <img src="https://ui-avatars.com/api/?name=Amit+Singh&background=cbd5e1&color=1e293b" alt="Daroga" class="avatar-xs">
+                            <span class="fw-600 text-sm">Daroga Amit Singh - Con...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vertical-status-timeline">
+                    <!-- Status 1 -->
+                    <div class="v-timeline-item completed">
+                        <div class="v-line"></div>
+                        <div class="v-marker"><i class="fa-solid fa-check"></i></div>
+                        <div class="v-content">
+                            <h4>FIR Registered</h4>
+                            <p>April 19, 2024 &middot; 10:15 AM</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Status 2 (Active) -->
+                    <div class="v-timeline-item active-status-box" onclick="toggleStatusSelect(this)">
+                        <div class="v-line"></div>
+                        <div class="v-marker yellow-check"><i class="fa-solid fa-check"></i></div>
+                        <div class="v-content">
+                            <div class="d-flex justify-between w-100">
+                                <h4>Under Investigation</h4>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                            <span class="status-pill pill-yellow d-inline-block mt-1">Active</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Status 3 -->
+                    <div class="v-timeline-item mb-2" onclick="toggleStatusSelect(this)">
+                        <div class="v-line dotted"></div>
+                        <div class="v-marker outline text-gray"><i class="fa-solid fa-microscope text-xs"></i></div>
+                        <div class="v-content">
+                            <h4>Evidence Collection</h4>
+                            <p>April 19, 2024 &middot; 10:24 AM</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Status 4 -->
+                    <div class="v-timeline-item border-none pb-0" onclick="toggleStatusSelect(this)">
+                        <div class="v-marker outline text-gray"><i class="fa-solid fa-check text-xs" style="opacity: 0"></i></div>
+                        <div class="v-content">
+                            <h4>Mark as Completed</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button class="btn btn-primary btn-block update-status-btn-large">Update Status</button>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SCREEN 3: Upload Evidence -->
+        <section id="inspector-upload-evidence" class="screen with-bottom-nav hidden">
+            <div class="content-scrollable inspector-content has-top-spacing no-top-card bg-white">
+                
+                <div class="case-card border-none box-shadow-none pt-0 pb-0">
+                    <div class="case-header bg-gray-50 p-3 rounded-lg">
+                        <div class="d-flex align-center gap-3">
+                            <div class="type-icon bg-blue text-white"><i class="fa-brands fa-facebook-f"></i></div>
+                            <h3>#2024/123456</h3>
+                        </div>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="evidence-folders mt-4 px-3">
+                    <div class="folder-item bg-green-50">
+                        <div class="d-flex align-center gap-3">
+                            <i class="fa-solid fa-folder text-green text-lg"></i>
+                            <span class="fw-600 text-green">Status Updates</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-green"></i>
+                    </div>
+                    <div class="folder-item bg-green-light mt-3">
+                        <div class="d-flex align-center gap-3">
+                            <i class="fa-solid fa-folder text-green text-lg"></i>
+                            <span class="fw-600 text-green">Evidence</span>
+                            <span class="status-pill pill-green ml-2">Active</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-green"></i>
+                    </div>
+                </div>
+
+                <div class="upload-section px-3 mt-4">
+                    <div class="d-flex justify-between mb-3 align-center">
+                        <div class="d-flex align-center gap-2">
+                            <i class="fa-regular fa-file-lines text-gray"></i>
+                            <h4 class="text-main m-0">Upload Evidence</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gray"></i>
+                    </div>
+                    
+                    <div class="file-upload-card mb-4">
+                        <div class="d-flex align-center gap-3">
+                            <div class="file-icon"><i class="fa-solid fa-file-lines"></i></div>
+                            <div class="file-info">
+                                <h5>Case Report.pdf</h5>
+                                <p>10 MB</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-trash-can text-white op-70"></i>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-block mb-4" onclick="showScreen('inspector-case-tabs', 'Case Details')">Upload Evidence</button>
+                    
+                    <!-- Integrated Tabs from Mockup image 5 mid section -->
+                    <div class="tab-container mt-4">
+                        <div class="tab-header">
+                            <div class="tab-item active bg-transparent">Updates</div>
+                            <div class="tab-item bg-transparent">Evidence</div>
+                            <div class="tab-item bg-transparent">Notes</div>
+                        </div>
+                        <div class="tab-content pt-4">
+                            <div class="contact-card d-flex align-center bg-gray-50 p-3 rounded-lg">
+                                <div class="avatar bg-blue-text-white mr-3"><i class="fa-solid fa-user"></i></div>
+                                <div>
+                                    <h4 class="m-0">BasteRuppe.st</h4>
+                                    <p class="text-xs text-gray mt-1 m-0"><i class="fa-solid fa-briefcase"></i> SS. Rajeesh Kumar to April 10/14, 5:24</p>
+                                </div>
+                                <div class="bg-blue text-white p-2 rounded ml-auto"><i class="fa-solid fa-envelope"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SCREEN 4: Case Details Tabs (Updates, Evidence, Notes) -->
+        <section id="inspector-case-tabs" class="screen with-bottom-nav hidden">
+            <div class="content-scrollable inspector-content has-top-spacing no-top-card bg-white">
+                
+                <div class="case-card border-none box-shadow-none pt-0">
+                    <div class="case-header">
+                        <div class="d-flex align-center gap-3">
+                            <div class="type-icon bg-blue text-white"><i class="fa-solid fa-shield-halved"></i></div>
+                            <h3>FIR #2024/123456</h3>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray mt-1 ml-5 pl-2">Theft Lat D:1024</p>
+                    
+                    <h3 class="mt-3">Theft at Connaught Place PS</h3>
+                    <p class="text-sm text-green mt-1"><i class="fa-solid fa-circle text-xs"></i> April 19, 2024 10:24</p>
+                </div>
+                
+                <div class="px-3">
+                    <div class="quick-status-tabs mb-4">
+                        <div class="qs-tab active"><i class="fa-solid fa-check"></i> Status</div>
+                        <div class="qs-tab">Progress</div>
+                        <div class="qs-tab"><i class="fa-regular fa-square-plus"></i> Notes</div>
+                    </div>
+
+                    <h4 class="mb-3">Case Details</h4>
+                    <p class="text-xs text-gray mb-1">TOP TREND</p>
+                    
+                    <div class="d-flex justify-between align-center mb-4 pb-3 border-bottom">
+                        <div>
+                            <h3 class="m-0">Theft</h3>
+                            <span class="text-sm text-gray">Status: In Progress</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-gray d-block"><i class="fa-regular fa-clock"></i> AMITE, GOLAPH</span>
+                            <span class="text-xs fw-600 text-main">Service Engineer</span>
+                        </div>
+                    </div>
+                    
+                    <div class="main-tabs">
+                        <div class="m-tab active">Updates</div>
+                        <div class="m-tab">Evidence</div>
+                        <div class="m-tab">NOTES</div>
+                    </div>
+                    
+                    <div class="tab-body mt-4">
+                        <div class="activity-timeline">
+                            <div class="a-timeline-item">
+                                <div class="a-timeline-icon bg-green-light text-green"><i class="fa-solid fa-check"></i></div>
+                                <div class="a-timeline-content">
+                                    <h4>FIR Registered</h4>
+                                    <p>April 19, 2024 - 10:15 AM</p>
+                                    <span class="text-green text-xs font-mono">ID: 30024.DOG</span>
+                                </div>
+                            </div>
+                            <div class="a-timeline-item last">
+                                <div class="a-timeline-icon bg-blue-light text-blue"><i class="fa-solid fa-xmark" style="transform: rotate(45deg);"></i></div>
+                                <div class="a-timeline-content">
+                                    <h4>Case Assigned</h4>
+                                    <p>Continues Investigation to Daroga</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Bottom Navigation -->
+        <nav id="inspector-bottom-nav" class="bottom-nav">
+            <div class="nav-item active" onclick="showScreen('inspector-dashboard', 'Dashboard', true)">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('inspector-update-status', 'Update Case Status')">
+                <i class="fa-regular fa-file-lines"></i>
+                <span>Cases</span>
+            </div>
+            <div class="nav-item fab-item" onclick="showScreen('inspector-upload-evidence', 'Upload Evidence')">
+                <div class="fab">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showScreen('inspector-upload-evidence', 'Upload Evidence')">
+                <div class="rel">
+                    <i class="fa-solid fa-file-shield text-danger" style="color: #ef4444"></i>
+                    <span class="nav-badge" style="top: 0; right: -5px; width: 10px; height: 10px; border-radius: 50%;"></span>
+                </div>
+                <span>Evidence</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('inspector-dashboard', 'Reports', true)">
+                <i class="fa-solid fa-sliders"></i>
+                <span>Reports</span>
+            </div>
+        </nav>
+    </div>
+
+    <script src="inspector.js"></script>
+</body>
+</html>
